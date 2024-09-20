@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises in JS</title>
+</head>
+<body>
+    <h1>Promises</h1>
+
+
+
+</body>
+<script>
+
+const cart = ["pant", "kurta", "Lower"];
+// createOrder will generate the OrderId after that it will call proceedtoPayment but there is not gurantee here that proceedtoPayment always executes in many cases it can't execute
+// api.CreateOrder(cart, function(orderId){
+//     proceedtoPayment(orderId);
+//     //what happen if our createOrder call the function twice, or thrice or never call it but promise handles beautifully.
+
+
+// }); 
+
+
+//Here we are using promises
+// const promise = createOrder(cart);
+// //As soon as promise will be filled with the data it will call the proceedToPayment API
+
+// promise.then(function(orderId){
+//     proceedtoPayment(orderId);
+// })
+
+
+// const gitHubAPI = "https://github.com/zaifee/Course_Codes";
+
+// const user = fetch(gitHubAPI); //this fetch function returns a promise
+// console.log(user);
+
+
+createOrder(cart, function(orderId) {
+    proceedToPayment(orderId, function(paymentInfo) {
+        showOrderSummary(paymentInfo, function() {
+            updateWalletBalance();
+
+            //This is become call back hell or also known as pyramid of doom
+        })
+    })
+})
+
+//How can we use promise here 
+createOrder(cart)
+    .then(function (orderId) {
+       return proceedToPayment(orderId);
+    })
+    .then(function(paymentInfo) {
+      return  showOrderSummary(paymentInfo);
+    })
+    .then(function(paymentInfo) {
+      return  updateWalletBalance(paymentInfo);
+    });
+
+    //don't foreget to write the return statement otherwise in debugging you will pulled your hair...
+
+    reateOrder(cart)
+    .then(orderId => proceedToPayment(orderId))
+    .then(paymentInfo => showOrderSummary(paymentInfo))
+    .then(paymentInfo => updateWalletBalance(paymentInfo));
+
+    //this will looks more lean and modern developers write this type of code and there is no need of return when we used arrow function
+
+
+    //creating a promise 
+
+    
+</script>
+</html>

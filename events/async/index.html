@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async in JS </title>
+</head>
+<body style="background-color: rgb(74, 71, 71);">
+   <h1>Async in Js </h1>
+</body>
+<script>
+    const p = new Promise((resolve, reject) => {
+        setTimeout( () => {
+            resolve("Hrrah ! Promise is resolved completely ");
+        }, 10000)
+    })
+
+    const p1 = new Promise((resolve, reject) => {
+        setTimeout( () => {
+            resolve("Promise 2 resoved !! ");
+        }, 5000)
+    })
+
+    //1. It will always return a promise
+    //2. We can either return a promise or any value it may be string, int or any other but when we return it wil automatically wrap up inside the promise. and the Promise will return from this function 
+    // async function getData(){
+    //     return p;
+    // }
+
+    // const dataPromise =  getData();
+    // //how can I get the data from the dataPromise
+
+    // dataPromise.then(res => (console.log(res)));
+
+
+    //Asysnc and await combo is used to handle the promises -->
+
+
+
+    // 1.How we are handling promises before async and await 
+    function getData(){
+        //Js engine will not wait for promise to be resolved
+        p.then( (res) => console.log(res));
+        console.log("AsslamuAlaikum ");
+    }
+    
+    getData();
+
+
+    // 2. How we are handling promises after async and await 
+        async function handlePromise(){
+            console.log("I'm Js Engine na ruka ho na rokunga !! ");
+            const val = await p;
+            console.log("Asslamu Alaikum");
+            console.log(val);
+
+            const val2 = await p1;
+            console.log("Walikum Asslam");
+            console.log(val2);
+
+        }
+
+        handlePromise();
+
+
+        //Promises real life example 
+        // const API_URL = "https://api.github.com/users/{user}";
+        async function getData(){
+            //fetch API will return a promise 
+            // const data = fetch(API_URL);
+
+        }
+
+</script>
+</html>

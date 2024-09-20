@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studying call Back Hell</title>
+</head>
+<body>
+    <h1>Alhamdulliah ! Tomorrow night I'm gonna to smash your boy.</h1>
+</body>
+<script>
+    const cart = ["shoes", "lower", "T-Shirt", "Protein"];
+
+    api.createOrder(cart, function() {
+
+        api.proceedToPayment(function(){
+
+            api.showOrderSummary(
+                function(){
+                    api.UpdateWallet();
+            }
+    
+            );
+
+
+    });
+
+});
+
+
+
+// here dependency is increased between the function that's why we called them as callBack hell;
+
+
+
+    
+</script>
+</html>

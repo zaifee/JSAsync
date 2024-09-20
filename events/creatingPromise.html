@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+</head>
+<body>
+    <h1>Creating a Promise and handling the error gracefully </h1>
+</body>
+<script>
+    const cart = ["jeans", "pant", "kurta"];
+
+
+// const promise = createOrder(cart); //it will generate the orderId
+
+// promise
+// .then( function (orderId){
+//     console.log(orderId);
+//     // proceedToPayment(orderId);
+// })
+// //This is how we handle the error in js gracefully
+// .catch(function (err){
+//     console.log(err.message);   
+// })
+
+
+
+createOrder(cart)
+.then( function (orderId){
+    console.log(orderId);
+    return orderId;
+    // proceedToPayment(orderId);
+})
+.then(function (orderId){
+  return  proceedToPayment(orderId);
+})
+.then( function (paymentInfo) {
+    console.log(paymentInfo);
+})
+//This is how we handle the error in js gracefully
+//If there is any error in the upper promise chain then simply a single catch is enough to handle those error
+.catch(function (err){
+    console.log(err.message);   
+})
+
+
+
+//funciton of  creating an Order -- This is how we will return a promise either reject a prmise or resolve a promise
+function createOrder(cart){
+
+    //These are facilities that are provided by js developer
+
+    const pr = new Promise( function (resolve, reject){
+
+        //This is the place where we validate the cart or call to database
+        //createOrder 
+        //validating cart
+
+            if(!validateCart(cart)){
+                //we will thrown an error 
+                const err = new Error("cart is not valid");
+                reject(err);
+            }
+
+            //if cart is validated and the db call is succesfull 
+            const orderId = "12345";
+            if(orderId){
+                setTimeout( function() {
+                    console.log(orderId);
+                } , 5000)
+            }
+    });
+
+        return pr;
+    
+}
+
+function proceedToPayment(orderId){
+    //it will return a promise
+    return new Promise( function (resolve, reject) {
+        resolve("Payment Successful ");
+    })
+}
+
+
+function validateCart(cart){
+    return false;
+}
+</script>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeWork of Promise</title>
+</head>
+<body>
+    <h1>HomeWork  of Promise </h1>
+    
+</body>
+<script>
+
+    /*
+    const cart = ["kurta", "jeans", "trousers", "pants", "tShirts"];
+
+    createOrder(cart)
+    .then( function (orderId) {
+       return proceedToPayment(orderId);
+    })
+   
+    .then( function (paymentInfo) {
+       return showOrderSummary(paymentInfo);
+    })
+    .then( function (orderId) {
+       return updateWalletBalance(orderId);
+    })
+    .then( function() {
+        console.log("Process Completed Successfully ");
+    })
+    .catch( function (err) {
+        console.log(err.Message);
+    })
+
+
+    //Create order 
+    function createOrder(cart) {
+
+        return new Promise (function (resolve, reject) {
+             
+            setTimeout(function() {
+                console.log(`Order created for cart: ${cart}`);
+                const orderId = "123242";
+                resolve(orderId);
+            }, 1000)
+        })
+    }
+
+
+
+
+//  Proceed To Payment
+    function proceedToPayment(orderId){
+        return new Promise( function (resolve, reject) {
+            //showing payment
+           setTimeout( function(){
+            const paymentInfo = {orderId, status: "Paid", amount: 100}; 
+            resolve(paymentInfo);
+           }, 1000);
+        })
+    }
+
+
+// showing Order Summary 
+    function showOrderSummary(paymentInfo){
+        return new Promise( function (resolve, reject) {
+            setTimeout( function (){
+                console.log(`Order Summary for orderId: ${paymentInfo.orderId}`);
+                resolve(paymentInfo.orderId);
+            }, 1000)
+        });
+    }
+
+
+// Updating the Balance
+    function updateWalletBalance(orderId){
+        return new Promise( function (resolve, reject) {
+            setTimeout( function(){
+                console.log(`Wallet balance updated for OrderId: ${orderId}`);
+                resolve();
+
+            }, 1000);
+        });
+    }
+        */
+
+ const cart1 = ["jeans", "kurta", "pajama"];
+
+ //Producer Part 
+  function createOrder(cart1){
+    return new Promise( (resolve, reject) => {
+        setTimeout(() => {
+            console.log(`Order created Successfully for cart ${cart1}`);
+            const orderId = "1432";
+            resolve(orderId);
+        }, 1000)
+    })
+  }
+
+
+  function proceedToPayment(orderId){
+    return new Promise( (resolve, reject) => {
+        setTimeout( () => {
+            console.log(`Payment Proceed for OrderId : ${orderId}`);
+            const paymentInfo = {orderId, status: "Paid", amount: 100}; //simulating payment
+            resolve(paymentInfo);
+        }, 1500);
+    })
+  }
+
+
+  function showOrderSummary(paymentInfo){
+    return new Promise ( (resolve, reject) => {
+        setTimeout(() => {
+            console.log(`Showing order Summary for the selected cart : ${paymentInfo.orderId}`);
+            resolve(paymentInfo.orderId);
+        }, 2000)
+    })
+  }
+
+
+  function updateWalletBalance(orderId){
+    return new Promise( (resolve, reject) => {
+        setTimeout( () => {
+            console.log(`Update Wallet Balance for the orderId: ${orderId}`);
+            resolve(orderId);
+        }, 1200)
+    })
+  }
+
+ //Consumer Part 
+ createOrder(cart1)
+ .then(orderId => proceedToPayment(orderId))
+ .then(paymentInfo => showOrderSummary(paymentInfo))
+ .then(orderId => updateWalletBalance(orderId))
+ .then(() => console.log('Transcation Completed Successfully'))
+ .catch(error => console.log('Error:', error.Message));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

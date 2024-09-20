@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Events</title>
+</head>
+
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing images</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="photoshop"
+                    src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt="photoshop"></li>
+            <li><img width="200px" id="japan"
+                    src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="river"
+                    src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="owl"
+                    src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="prayer"
+                    src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+
+    </div>
+    <script>
+        // document.getElementById('owl').onclick = function(){
+        //     alert("Do you want to really to know about Owl ?? ")
+        // } //It gives less feature so we will not use it
+
+        //********************Event Listener*****************************\\
+        // Event listener can listen many event at the same time like keyboard events in which any user can press key, or mouse event like drag and drop of a mouse and clicking on the images and many more things evenListener can Listen
+
+        // three parameters are used in event Listener if we don't give third parameter it assumes as false otherwise we can give true also-- 
+        //Inside the function argument there is a event object which list different types of events
+        document.getElementById('owl').addEventListener('click', function (e) {
+            console.log(e);
+        }, false); //false means event bubbling while in some cases we can used eventCapturing that's why we marked as true this is known as Event Propagation
+
+
+        /*
+         Another approach -- attachEvents -- Used in Internet Explorer
+         Jquery - on se hi kam chal jata tha
+         study -- type = "It defines the type of event", timestamp, defaultPrevent= "with the help of this we can prevent default action of any form or btn"
+         target  = "The target property refers to the element that triggered the event. This is the deepest element that caused the event to occur.", 
+          toElement = "The toElement property is specific to mouse events. It refers to the element that the pointer has moved to", 
+          srcElement = The srcElement property is an alias for target in older versions of Internet Explorer. It points to the element that originally triggered the event.
+          , currentTarget = "The currentTarget property refers to the element to which the event handler is currently attached. This is useful when the event handler is attached to a parent element, and you need to know the element that is handling the event at the current phase of event propagation.";
+         clientx, clienty, screenx, screenY -- asked in Interview
+         clientX: The horizontal coordinate of the mouse pointer relative to the viewport's client area.
+        clientY: The vertical coordinate of the mouse pointer relative to the viewport's client area.
+        screenX: The horizontal coordinate of the mouse pointer relative to the screen.
+        screenY: The vertical coordinate of the mouse pointer relative to the screen.
+ 
+ 
+ 
+ 
+ 
+ 
+         altkey, ctrlKey, shiftKey, keyCode
+      */
+        /*
+                document.getElementById('images').addEventListener('click', function(){
+                    console.log("Clicking inside the UL");
+                })
+        
+                document.getElementById('click', function(e){
+                    console.log("ow clicked");
+                    e.stopPropagation; //it will stops listening of events after that
+                })
+        
+        
+                document.getElementById('google').addEventListener('click', function(e){
+                    console.log('google clicked');
+                        e.preventDefault();
+                        e.stopPropagation();
+        
+                       
+                }, false);
+        
+                */
+
+
+        //Working like a project
+        document.getElementById('images').addEventListener('click', function (e) {
+            // console.log(e.target);
+            //event.target from which this event occrured 
+            // console.log(e.target.parentNode); 
+            console.log(e.target.tag);
+            if (e.target.tag === 'IMG') {
+                let removeIt = e.target.parentNode;
+                removeIt.remove();
+            }
+
+            //removeIt.parentNode.removeChild(removeIt); //new method to remov items
+        }, false)
+
+
+
+
+    </script>
+
+</body>
+
+</html>
